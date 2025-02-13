@@ -1,5 +1,8 @@
-SOURCE_FOLDER: "C:/Users/Admin/Downloads/Dataset 1/Dataset 1"
+SOURCE_FOLDER_HAVE_VIDEOS: "C:/Users/Admin/Downloads/Dataset 1/Dataset 1"
 MAX_FRAME_COUNT: 1000
+
+# for START.bat file 
+FOLDER_FOR_INFER : "1_extracted_frames"
 MODEL_PATH : "yolo11l.pt"
 KEY_CLASS_KEEP_LIST: 
   - 8

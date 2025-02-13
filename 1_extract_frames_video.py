@@ -69,7 +69,7 @@ if __name__ == '__main__':
         data = yaml.safe_load(file)
     max_frame_count = data["MAX_FRAME_COUNT"]
     # folder_path = r"C:\Users\Admin\Downloads\Dataset 1\Dataset 1"
-    folder_path = data["SOURCE_FOLDER"]
+    folder_path = data["SOURCE_FOLDER_HAVE_VIDEOS"]
     ls_video_path = find_all_video_paths(folder_path)
 
     for video_path in tqdm(ls_video_path, total=len(ls_video_path)):

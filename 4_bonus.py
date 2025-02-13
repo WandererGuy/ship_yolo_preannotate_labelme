@@ -3,7 +3,14 @@ import shutil
 import subprocess
 from tqdm import tqdm
 import time 
-source_folder = "1_extracted_frames"
+import yaml
+
+# Load the YAML file
+with open("config.yaml", "r") as file:
+    data = yaml.safe_load(file)
+
+FOLDER_FOR_INFER =  data["FOLDER_FOR_INFER"]
+source_folder = FOLDER_FOR_INFER
 dest_folder = "2_dest_folder"
 os.makedirs(dest_folder, exist_ok=True)
 for folder_name in tqdm(os.listdir(source_folder), total = len(os.listdir(source_folder))):
