@@ -1,0 +1,6 @@
+train: C:\Users\Admin\CODE\work\ship_detect\assist_label\1_686\YOLODataset/images/train/
+val: C:\Users\Admin\CODE\work\ship_detect\assist_label\1_686\YOLODataset/images/val/
+
+nc: 3
+
+names: ['0', '3', '1']
