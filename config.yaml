@@ -1,0 +1,5 @@
+SOURCE_FOLDER: "C:/Users/Admin/Downloads/Dataset 1/Dataset 1"
+MAX_FRAME_COUNT: 1000
+MODEL_PATH : "yolo11l.pt"
+KEY_CLASS_KEEP_LIST: 
+  - 8

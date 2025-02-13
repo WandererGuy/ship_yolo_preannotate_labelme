@@ -34,12 +34,20 @@ if __name__ == "__main__":
     filter boat images from frames
     return saved txt yolo output in 1 folder and pic output in another folder 
     """
+    import yaml
+
+    # Load the YAML file
+    with open("config.yaml", "r") as file:
+        data = yaml.safe_load(file)
+
     tmp_ship = []
-    model = YOLO("yolo11l.pt")  # pretrained YOLO11n model
+    MODEL_PATH = data["MODEL_PATH"]
+    model = YOLO(MODEL_PATH)  # pretrained YOLO11n model
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print (device)
     model.to(device)
-    KEY_CLASS = 8
+
+    KEY_CLASS_KEEP_LIST = data["KEY_CLASS_KEEP_LIST"]
     import argparse
     # Set up argument parser
     parser = argparse.ArgumentParser(description='convert coco txt to labelme json.')
@@ -83,7 +91,7 @@ if __name__ == "__main__":
             found_boat = False
             for single_object_result in single_image_result: # loop through objects in 1 image 
                 single_object_result_box = single_object_result.boxes
-                if int(single_object_result_box.cls.item()) == KEY_CLASS:
+                if int(single_object_result_box.cls.item()) in KEY_CLASS_KEEP_LIST:
                         found_boat = True
                         # xyxy = single_object_result_box.xyxy.cpu().numpy()[0]
                         # img = single_image_result.orig_img
@@ -95,7 +103,7 @@ if __name__ == "__main__":
                 
             if found_boat:
                 print (single_image_result.path)
-                print ("BOATTTTTTTTTTT")
+                print ("find interested object")
                 filename = os.path.basename(single_image_result.path)
                 # single_image_result.save(os.path.join(SAVE_FOLDER, filename))
                 name = os.path.basename(single_image_result.path).split(".")[0] + ".txt"
@@ -104,5 +112,5 @@ if __name__ == "__main__":
 
             else: 
                 print (single_image_result.path)
-                print ("NOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+                print ("not found interested object")
 
