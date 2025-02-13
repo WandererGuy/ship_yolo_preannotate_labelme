@@ -5,7 +5,7 @@ from tqdm import tqdm
 import time 
 
 
-main_folder = "D:\dest_folder"
+main_folder = "2_dest_folder"
 for folder_name in tqdm(os.listdir(main_folder), total = len(os.listdir(main_folder))):
         folder_path = os.path.join(main_folder, folder_name)
         image_input_folder = os.path.join(folder_path, 'image')

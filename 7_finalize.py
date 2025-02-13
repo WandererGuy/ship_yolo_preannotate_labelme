@@ -3,11 +3,10 @@ import shutil
 import subprocess
 from tqdm import tqdm
 import time 
-
-output_folder = "AI_label_1302"
+output_folder = f"3_AI_label"
 os.makedirs(output_folder, exist_ok=True)
 
-main_folder = "D:\dest_folder"
+main_folder = "2_dest_folder"
 for folder_name in tqdm(os.listdir(main_folder), total = len(os.listdir(main_folder))):
         folder_path = os.path.join(main_folder, folder_name)
         image_input_folder = os.path.join(folder_path, 'image')

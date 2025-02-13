@@ -4,7 +4,7 @@ import subprocess
 from tqdm import tqdm
 import time 
 source_folder = "1_extracted_frames"
-dest_folder = "D:\dest_folder"
+dest_folder = "2_dest_folder"
 os.makedirs(dest_folder, exist_ok=True)
 for folder_name in tqdm(os.listdir(source_folder), total = len(os.listdir(source_folder))):
     os.rename(os.path.join(source_folder, folder_name), (os.path.join(source_folder, folder_name)).replace(' ', '_'))

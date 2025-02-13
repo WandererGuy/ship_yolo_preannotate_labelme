@@ -8,8 +8,19 @@ import shutil
 import os
 import time 
 import yaml
+
+
+SOURCE_FOLDER = r"C:\Users\Admin\Downloads\Dataset 1\Dataset 1"
+
 map_video_save = {}
 # Read from config.yaml
+# Check if the folder exists
+for folder_path in ["1_extracted_frames", "2_dest_folder", "3_AI_label"]:
+    if os.path.exists(folder_path):
+        # Remove the folder and its contents
+        shutil.rmtree(folder_path)
+        print(f"The folder {folder_path} has been removed.")
+
 OUTPUT_FOLDER = r".\1_extracted_frames"
 EXTRACT_SESSION = True
 max_frame_count = 1000
@@ -55,14 +66,18 @@ if __name__ == '__main__':
     """
     if EXTRACT_SESSION:
             # folder_path = r"C:\Users\Admin\Downloads\Dataset 1\Dataset 1"
-            folder_path = r"C:\Users\Admin\Downloads\Dataset\Dataset\Video"
+            folder_path = SOURCE_FOLDER
             ls_video_path = find_all_video_paths(folder_path)
 
             for video_path in tqdm(ls_video_path, total=len(ls_video_path)):
-                    with open('map.yaml', 'r') as file:
-                        map_data = yaml.load(file, Loader=yaml.FullLoader)
-                        if map_data is None:
-                            map_data = {}
+                    try:
+                        with open('map.yaml', 'r') as file:
+                            map_data = yaml.load(file, Loader=yaml.FullLoader)
+                            if map_data is None:
+                                map_data = {}
+                    except:
+                        map_data = {}
+                        
 
                     video_capture = cv2.VideoCapture(video_path)
                     total_frames = int(video_capture.get(cv2.CAP_PROP_FRAME_COUNT))
