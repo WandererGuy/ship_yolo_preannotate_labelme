@@ -24,8 +24,6 @@ def extract_width_height(filepath):
     height, width, channels = image.shape
     return width, height
 
-
-
 def read_yolo_coor(txt_filepath):
     yolo_coor_ls = []
     with open(txt_filepath, "r") as f:
@@ -36,7 +34,6 @@ def read_yolo_coor(txt_filepath):
             class_id, x_center, y_center, width, height = value
             yolo_coor_ls.append([class_id, float(x_center), float(y_center), float(width), float(height)])
     return yolo_coor_ls
-
 
 def coor2coor(yolo_coor, imageWidth, imageHeight):
     x_center, y_center, width, height = yolo_coor

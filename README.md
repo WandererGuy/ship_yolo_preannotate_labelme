@@ -9,5 +9,6 @@ START.bat
 scripts does these:
 A pretrained yolo gives u pre-annotated images in labelme
 
+functions inside do:  (START.bat)
 given a folder have subfolder have raw images 
 turn into a ready labelme folder ( ./3_AI_label folder) with interested object preannotated (filter images have no interested object in it), start labelling
