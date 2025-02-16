@@ -27,7 +27,7 @@ This script performs the following tasks:
 ## How it Works
 
 1. **Input:**
-   - A folder containing raw images (and subfolders).
+   - A folder containing subfolders which have raw images 
 
 2. **Process:**
    - The tool processes the images and pre-annotates them using a YOLO model.
@@ -39,7 +39,7 @@ This script performs the following tasks:
 ## Preparation
 
 1. Open the `config.yaml` file.
-2. Replace the necessary values (e.g., object labels, folder paths) to match your dataset.
+2. Replace the necessary values to match your case.
 
 ## Usage
 
