@@ -4,6 +4,11 @@ import subprocess
 from tqdm import tqdm
 import time 
 import yaml
+for folder_path in ["1_extracted_frames", "2_dest_folder", "3_AI_label"]:
+    if os.path.exists(folder_path):
+        # Remove the folder and its contents
+        shutil.rmtree(folder_path)
+        print(f"The folder {folder_path} has been removed.")
 
 # Load the YAML file
 with open("config.yaml", "r") as file:

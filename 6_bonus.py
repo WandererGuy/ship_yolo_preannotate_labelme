@@ -23,6 +23,7 @@ for folder_name in tqdm(os.listdir(main_folder), total = len(os.listdir(main_fol
                 ]
         cm = " ".join(command)
         print (cm)
+        time.sleep(3)
         with subprocess.Popen(command, 
                                 stdout=subprocess.PIPE, 
                                 stderr=subprocess.PIPE, 

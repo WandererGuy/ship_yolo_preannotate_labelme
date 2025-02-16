@@ -65,6 +65,8 @@ def main():
     filter images (with interested object) from the folder
     return saved txt yolo output (in 1 folder) and pic output (in another folder) 
     """
+
+
     with open("config.yaml", "r") as file:
         data = yaml.safe_load(file)
 
@@ -102,7 +104,6 @@ def main():
             stream=True
         ):
             for single_image_result in batch_yolo_result:
-                print ("----------------------------------------------------")
                 found_object = False
                 for single_object_result in single_image_result: # loop through objects in 1 image 
                     if int(single_object_result.boxes.cls.item()) in KEY_CLASS_KEEP_LIST:

@@ -94,9 +94,13 @@ class OneObject:
         x_min, y_min, x_max, y_max = coor2coor(self.yolo_coor, self.imageWidth, self.imageHeight)
         return [x_min, y_min, x_max, y_max]
 
-
+import yaml
 if __name__ == "__main__":
-    KEY_CLASS = 8 
+    with open("config.yaml", "r") as file:
+        data = yaml.safe_load(file)
+
+    KEY_CLASS_KEEP_LIST = data["KEY_CLASS_KEEP_LIST"]
+
     img_ls = []
     count = 0 
     import argparse
@@ -120,11 +124,12 @@ if __name__ == "__main__":
         print (count)
         filepath = os.path.join(image_input_folder, filename)
         filename_id = filename.split(".")[0]
-        if filename.endswith('.jpg'):
+        if filename.endswith('.jpg') or filename.endswith('.png'):
             created = False
-            txt_filepath = os.path.join(txt_input_folder, filename.replace(".jpg", ".txt"))
+            txt_filepath = os.path.join(txt_input_folder, filename.replace(".jpg", ".txt").replace(".png", ".txt"))
             yolo_coor_ls = read_yolo_coor(txt_filepath)
             width, height = extract_width_height(filepath)
+            
             for yolo_coor in yolo_coor_ls:
                 one_object = OneObject(imageHeight = height,
                                 imageWidth = width, 
@@ -132,7 +137,7 @@ if __name__ == "__main__":
                 
                 one_object_json_coor = one_object.process_coor()
                 
-                if int(one_object.class_id) == KEY_CLASS:
+                if int(one_object.class_id) in KEY_CLASS_KEEP_LIST:
                     if created == False:
                         res = Total_example_json()
                         res.add_image_path(filename = filename)
@@ -140,7 +145,9 @@ if __name__ == "__main__":
                             imageHeight = height)
                         created = True
                     res.add_json_coor(one_object_json_coor)
-            with open(os.path.join(json_output_folder,filename_id + ".json"), 'w') as file:
+            dump_file = os.path.join(json_output_folder,filename_id + ".json")
+            
+            with open(dump_file, 'w') as file:
                 json.dump(res.result, file, indent=4)
 
             
