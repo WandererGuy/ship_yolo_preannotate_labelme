@@ -3,6 +3,7 @@ import json
 import os 
 from tqdm import tqdm 
 import copy
+import base64
 EXAMPLE_JSON = {
   "version": "5.6.1",
   "flags": {},
@@ -15,6 +16,12 @@ EXAMPLE_JSON = {
 }
 os.makedirs("json_files", exist_ok=True)
 
+def encode_image_data(image_path):
+    # Open the image file in binary mode
+    with open(image_path, "rb") as image_file:
+        # Read the image file and encode it in base64
+        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+    return encoded_string
 
 def extract_width_height(filepath):
     # Read the image
@@ -80,10 +87,12 @@ class Total_example_json:
         self.add_object(new_object_json)
     def add_image_path(self, filename):
         self.result["imagePath"] = filename
+        
     def add_image_width_height(self, imageWidth, imageHeight):
         self.result["imageHeight"] = imageHeight
         self.result["imageWidth"] = imageWidth
-
+    def add_image_data(self, image_path):
+        self.result["imageData"] = encode_image_data(image_path)
 class OneObject:
     def __init__(self, imageHeight, imageWidth, yolo_coor):
         self.imageHeight = imageHeight
@@ -141,6 +150,7 @@ if __name__ == "__main__":
                     if created == False:
                         res = Total_example_json()
                         res.add_image_path(filename = filename)
+                        res.add_image_data(image_path = filepath)
                         res.add_image_width_height(imageWidth = width, 
                             imageHeight = height)
                         created = True
