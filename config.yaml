@@ -1,6 +1,6 @@
 
 # FOLDER_FOR_INFER is the folder which contains subfolder which have all the images
-FOLDER_FOR_INFER : "D:/WORK/ship_dataset_crawl/crawl-original-google-images/images/all_danh_ca"
-MODEL_PATH : "checkpoints/best_boat.pt"
+FOLDER_FOR_INFER : "D:/WORK/ship_dataset_crawl/crawl-original-google-images/images/unknown"
+MODEL_PATH : "checkpoints/best1702.pt"
 KEY_CLASS_KEEP_LIST: 
   - 0

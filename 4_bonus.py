@@ -44,6 +44,11 @@ for folder_name in tqdm(os.listdir(source_folder), total = len(os.listdir(source
                             stdout=subprocess.PIPE, 
                             stderr=subprocess.PIPE, 
                             text=True) as process:
-        for line in process.stdout:
-            print(line, end='')
+        while True:
+            try:
+                for line in process.stdout:
+                    print(line, end='')
+                break
+            except:
+                pass
 
